@@ -5,11 +5,8 @@
 
 from scrapy import signals
 
-# useful for handling different item types with a single interface
-from itemadapter import ItemAdapter
 
-
-class BookStoreSpiderMiddleware:
+class ScrapeBooksSpiderMiddleware:
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the spider middleware does not modify the
     # passed objects.
@@ -17,9 +14,12 @@ class BookStoreSpiderMiddleware:
     @classmethod
     def from_crawler(cls, crawler):
         # This method is used by Scrapy to create your spiders.
-        s = cls()
-        crawler.signals.connect(s.spider_opened, signal=signals.spider_opened)
-        return s
+        s_variable = cls()
+        crawler.signals.connect(
+            s_variable.spider_opened,
+            signal=signals.spider_opened
+        )
+        return s_variable
 
     def process_spider_input(self, response, spider):
         # Called for each response that goes through the spider
@@ -53,7 +53,7 @@ class BookStoreSpiderMiddleware:
         spider.logger.info("Spider opened: %s" % spider.name)
 
 
-class BookStoreDownloaderMiddleware:
+class ScrapeBooksDownloaderMiddleware:
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the downloader middleware does not modify the
     # passed objects.
@@ -61,9 +61,12 @@ class BookStoreDownloaderMiddleware:
     @classmethod
     def from_crawler(cls, crawler):
         # This method is used by Scrapy to create your spiders.
-        s = cls()
-        crawler.signals.connect(s.spider_opened, signal=signals.spider_opened)
-        return s
+        s_variable = cls()
+        crawler.signals.connect(
+            s_variable.spider_opened,
+            signal=signals.spider_opened
+        )
+        return s_variable
 
     def process_request(self, request, spider):
         # Called for each request that goes through the downloader
